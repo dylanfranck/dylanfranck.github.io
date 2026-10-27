@@ -1,0 +1,10 @@
+title = "dylanfranck.com Gitleaks Configuration"
+
+[extend]
+# Extends the built-in default ruleset.
+useDefault = true
+
+[allowlist]
+description = "Paths that never hold secrets"
+# Lock file integrity hashes look like high-entropy strings.
+paths = ['''package-lock\.json''']

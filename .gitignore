@@ -1,0 +1,23 @@
+# Private reference material (other projects, client docs) — never commit.
+reference/
+
+# Secrets — never commit. Use .env.example for documented, empty placeholders.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies and build output
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Local tooling
+.claude/settings.local.json
+.DS_Store
+Thumbs.db

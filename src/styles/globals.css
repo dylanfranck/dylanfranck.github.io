@@ -1,0 +1,117 @@
+/* The ONLY place color values live. Components use these tokens through
+   Tailwind utilities (bg-primary, text-muted-foreground, ...) — never hex
+   literals or style={{ color }}. Accent is the teal-green from the logo. */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+/* WHY: dark mode follows the OS setting; no toggle, no JS, no flash. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0.99 0.004 160);
+  --foreground: oklch(0.22 0.02 200);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.55 0.12 170);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.012 170);
+  --secondary-foreground: oklch(0.3 0.03 190);
+  --muted: oklch(0.96 0.008 170);
+  --muted-foreground: oklch(0.5 0.02 200);
+  --accent: oklch(0.94 0.03 170);
+  --accent-foreground: oklch(0.3 0.06 180);
+  --destructive: oklch(0.58 0.22 27);
+  --border: oklch(0.91 0.01 180);
+  --input: var(--border);
+  --ring: oklch(0.6 0.12 170);
+
+  /* Project status roles — mapped from domain status ONLY in ProjectStatusBadge. */
+  --status-live: oklch(0.55 0.13 155);
+  --status-live-bg: oklch(0.95 0.04 155);
+  --status-progress: oklch(0.55 0.14 245);
+  --status-progress-bg: oklch(0.95 0.03 245);
+  --status-planned: oklch(0.58 0.12 75);
+  --status-planned-bg: oklch(0.96 0.04 85);
+  --status-archived: oklch(0.55 0.01 200);
+  --status-archived-bg: oklch(0.95 0.005 200);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.17 0.012 200);
+    --foreground: oklch(0.94 0.008 170);
+    --card: oklch(0.21 0.014 200);
+    --primary: oklch(0.74 0.12 170);
+    --primary-foreground: oklch(0.17 0.02 190);
+    --secondary: oklch(0.26 0.018 190);
+    --secondary-foreground: oklch(0.92 0.01 170);
+    --muted: oklch(0.24 0.014 200);
+    --muted-foreground: oklch(0.7 0.015 190);
+    --accent: oklch(0.28 0.04 175);
+    --accent-foreground: oklch(0.92 0.03 170);
+    --border: oklch(0.3 0.015 200);
+    --ring: oklch(0.7 0.12 170);
+
+    --status-live: oklch(0.78 0.13 155);
+    --status-live-bg: oklch(0.3 0.05 155);
+    --status-progress: oklch(0.78 0.1 245);
+    --status-progress-bg: oklch(0.3 0.05 245);
+    --status-planned: oklch(0.82 0.11 85);
+    --status-planned-bg: oklch(0.32 0.05 75);
+    --status-archived: oklch(0.72 0.01 200);
+    --status-archived-bg: oklch(0.28 0.008 200);
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-status-live: var(--status-live);
+  --color-status-live-bg: var(--status-live-bg);
+  --color-status-progress: var(--status-progress);
+  --color-status-progress-bg: var(--status-progress-bg);
+  --color-status-planned: var(--status-planned);
+  --color-status-planned-bg: var(--status-planned-bg);
+  --color-status-archived: var(--status-archived);
+  --color-status-archived-bg: var(--status-archived-bg);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: light dark;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}

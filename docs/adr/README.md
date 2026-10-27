@@ -1,0 +1,9 @@
+# ADR index
+
+| ADR | Title | Status |
+|---|---|---|
+| [ADR-001](ADR-001-nextjs-static-export.md) | Next.js with static export on GitHub Pages | Accepted |
+| [ADR-002](ADR-002-hub-and-spoke-subdomains.md) | Hub and spoke: projects live on their own subdomains | Accepted |
+
+New ADR: next number, `ADR-NNN-short-slug.md`, sections Context / Options considered /
+Decision / Consequences. Supersede rather than rewrite accepted decisions.

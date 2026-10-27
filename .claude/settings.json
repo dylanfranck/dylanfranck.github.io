@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev)",
+      "Bash(npm run lint)",
+      "Bash(npm run test:run)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx eslint:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npm view:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm ls:*)"
+    ],
+    "deny": [
+      "Bash(git:*)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  }
+}
