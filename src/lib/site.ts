@@ -19,5 +19,5 @@ export const site = {
   },
   // WHY: the GoatCounter site code (the "xyz" in xyz.goatcounter.com). Public by design;
   // it appears in every page's HTML. null = analytics off. See ADR-003.
-  analytics: { goatcounter: null as string | null },
+  analytics: { goatcounter: "dylanfranck" as string | null },
 } as const;
