@@ -24,3 +24,39 @@ decided, it becomes an ADR and the entry links to it. (Method carried over from 
   journal?), backups/export, and MFA.
 - **Revisit when:** the AWS hosting move (S3 + CloudFront + OpenTofu) is planned, since
   option 1 would ride on the same infrastructure.
+- **Research:** [research/private-spoke-auth.md](research/private-spoke-auth.md)
+
+---
+
+## R-002: Hosting and DNS on AWS
+
+- **Raised:** 2026-10-28
+- **Question:** move DNS (Namecheap → Route 53) and the static hub (GitHub Pages → S3 +
+  CloudFront), managed in OpenTofu, mainly to learn IaaS and networking?
+- **Options:**
+  1. **Stay as-is:** GitHub Pages + Namecheap DNS. $0, no learning.
+  2. **DNS only:** a Route 53 zone in OpenTofu (~$0.50/mo). Needs an email-forwarding
+     replacement first.
+  3. **DNS + static hub on AWS:** Route 53 + S3 + CloudFront (Free plan) + ACM, deployed
+     through GitHub OIDC. ~$1/mo; adds security headers.
+  4. **Plus one Compose box** (EC2 or Lightsail, ~$12–17/mo) for app spokes. No ALB,
+     NAT, or RDS at this scale; high-availability patterns stay as apply/destroy labs.
+- **Revisit when:** a personal AWS account exists with a budget alert, or a spoke needs a
+  server.
+- **Research:** [research/aws-hosting-costs.md](research/aws-hosting-costs.md),
+  [research/dns-to-route53.md](research/dns-to-route53.md)
+
+---
+
+## R-003: Visitor analytics for the hub
+
+- **Decided 2026-10-28 → [ADR-003](adr/ADR-003-goatcounter-analytics.md) (GoatCounter).**
+
+- **Raised:** 2026-10-28
+- **Question:** which cookieless analytics tool gives a private view of who visits the
+  hub and from where? (Google Search Console, set up 2026-10-28, already covers search.)
+- **Options:** GoatCounter (free, open source, API), Umami Cloud Hobby (free, 100K
+  events/mo, 6-month retention), Cloudflare Web Analytics (free), Plausible ($9/mo,
+  email reports). Full landscape in the research note.
+- **Revisit when:** Dylan picks one. Adding it is an ADR (new third-party service).
+- **Research:** [research/analytics.md](research/analytics.md)

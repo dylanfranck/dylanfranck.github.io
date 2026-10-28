@@ -17,4 +17,7 @@ export const site = {
     github: "https://github.com/dylanfranck",
     linkedin: "https://www.linkedin.com/in/dylan-franck/",
   },
+  // WHY: the GoatCounter site code (the "xyz" in xyz.goatcounter.com). Public by design;
+  // it appears in every page's HTML. null = analytics off. See ADR-003.
+  analytics: { goatcounter: null as string | null },
 } as const;

@@ -1,3 +1,4 @@
+export { Analytics } from "@/shared-component/Analytics";
 export { NavLinks } from "@/shared-component/NavLinks";
 export { PageContainer } from "@/shared-component/PageContainer";
 export { Prose } from "@/shared-component/Prose";

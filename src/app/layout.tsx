@@ -3,10 +3,11 @@
 // ROLE: Root layout — fonts, global styles, site chrome, default SEO metadata
 // DEPENDENCIES: next/font/google, @/shared-component, @/lib/site, @/styles/globals.css
 // OWNER: Dylan / Claude
+// ADR: ADR-003 (analytics)
 
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { SiteFooter, SiteHeader } from "@/shared-component";
+import { Analytics, SiteFooter, SiteHeader } from "@/shared-component";
 import { site } from "@/lib/site";
 import "@/styles/globals.css";
 
@@ -40,6 +41,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         {children}
         <SiteFooter />
+        {/* WHY: production builds only, so `next dev` sessions never count. */}
+        <Analytics code={process.env.NODE_ENV === "production" ? site.analytics.goatcounter : null} />
       </body>
     </html>
   );

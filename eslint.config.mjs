@@ -5,7 +5,7 @@ const config = [
   ...nextVitals,
   ...nextTs,
   {
-    ignores: [".next/**", "out/**", "coverage/**", "legacy/**", "reference/**", "next-env.d.ts"],
+    ignores: [".next/**", "out/**", "coverage/**", "legacy/**", "reference/**", "public/vendor/**", "next-env.d.ts"],
   },
   {
     files: ["src/**/*.{ts,tsx}"],
