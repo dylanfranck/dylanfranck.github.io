@@ -32,6 +32,10 @@ export type ProjectMeta = {
   url?: string;
   embedUrl?: string;
   tags: string[];
+  /** Main technologies, shown as chips. */
+  stack: string[];
+  /** Where it was built, e.g. "GeekSI" — signals work that can't be linked publicly. */
+  org?: string;
   order: number;
   draft: boolean;
 };
@@ -58,6 +62,8 @@ export function parseProjectMeta(slug: string, raw: unknown): ProjectMeta {
     url,
     embedUrl,
     tags: optionalStringArray(file, meta, "tags"),
+    stack: optionalStringArray(file, meta, "stack"),
+    org: optionalString(file, meta, "org"),
     order,
     draft: optionalBoolean(file, meta, "draft"),
   };

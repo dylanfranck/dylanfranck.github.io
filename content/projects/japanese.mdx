@@ -1,11 +1,39 @@
 export const metadata = {
-  title: "Japanese study app",
-  summary: "TODO(Dylan): one line on what it does and who it's for.",
+  title: "単語カード: Japanese vocab cards",
+  summary: "A personal flashcard app for drilling Japanese vocabulary: Claude-generated examples and mnemonics, multiple study modes, and spaced repetition.",
   status: "live",
   kind: "external",
   url: "https://jp.dylanfranck.com",
-  tags: ["web", "language"],
+  stack: ["React", "Vite", "Supabase", "Claude API", "Vercel"],
+  tags: ["language", "ai"],
   order: 1,
 };
 
-TODO(Dylan): a few paragraphs: why you built it, what's interesting about it, the stack.
+{/* TODO(Dylan): drafted from the repo's README and retrospective. Edit freely. */}
+
+I study Japanese with Claude, and at the end of a session I'd ask it to export the day's
+vocabulary as a CSV. 単語カード (*tango kādo*, "word cards") is where those CSVs go:
+each import becomes a deck, and the app drills it.
+
+## What it does
+
+- **Study modes:** classic flip cards, multiple choice, and reverse (English → Japanese),
+  with a hint that shows an example sentence in Japanese only.
+- **AI enrichment on demand:** Claude generates example sentences, mnemonics, and related
+  words for any card.
+- **Spaced repetition:** a lightweight score per card that decays over time, so the
+  words you're forgetting come back around.
+- **Real Japanese text handling:** morphological analysis (kuromoji) and kana conversion
+  (WanaKana), so typed answers and conjugations are graded properly instead of by exact match.
+
+## What it taught me
+
+After eight phases shipped with every test green, I sat down to actually study and hit a
+batch of bugs in a single session. The retrospective boiled down to one sentence: *"done"
+meant "tests pass on hand-crafted fixtures," never "works on the real 956-word corpus, on
+my phone, looking like the wireframe."* About 40% of my verb deck turned out to be
+inflected forms the data model never accounted for.
+
+The fixes were mostly process: test fixtures sampled from the real data, a mobile
+viewport in the end-to-end tests, and a visual pass against the wireframes before
+anything counts as done.

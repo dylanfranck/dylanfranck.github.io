@@ -1,13 +1,32 @@
 export const metadata = {
   title: "Memories",
-  summary: "A photo journal in the spirit of Apple Journal — a short entry and the pictures from each day.",
-  status: "planned",
+  summary: "A visual diary: a timeline of photos and short entries, built for looking back with some distance instead of posting in the moment.",
+  status: "in-progress",
   kind: "writeup",
-  tags: ["app", "photos"],
-  order: 3,
-  draft: true,
+  stack: ["HTML", "JavaScript"],
+  tags: ["personal-tools", "photos"],
+  order: 7,
 };
 
-TODO(Dylan): the idea, and what's public vs. private. Journal entries are personal, so the
-app itself will need auth and its own backend (see docs/adr/ADR-002) — this page can
-describe it and link out once it exists.
+{/* TODO(Dylan): drafted from the visual-diary README and prototype. Edit freely. */}
+
+Social media is built for the moment: post it now, while it's happening. I wanted the
+opposite, a place to collect the photos and notes from a day and come back to them later,
+when there's room to think about what they meant.
+
+The current prototype is a memory timeline that loads my own data and lays it out
+chronologically. Open questions I'm still working through:
+
+- **Why not just a diary, or a private Instagram?** Pulling from the places photos already
+  live (with real API connections) and having time for contemplation are the bets.
+- **Privacy and storage:** it's the most personal data I have, so it can't be a public
+  page. It needs real authentication, and arguably encryption I control.
+- **Inheritance:** a long-horizon idea that a lifetime of memories could become something
+  passed down, like a photo album that keeps growing.
+
+## Personal tools behind auth
+
+This, the [PTO planner](/projects/pto-calculator/), and the
+[finance dashboard](/projects/finance-dashboard/) share a problem: they're only useful
+with my real data, so they need to be reachable from anywhere and locked to me. That's
+the next piece of infrastructure I want to build for this site's spokes.

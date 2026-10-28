@@ -1,0 +1,19 @@
+export const metadata = {
+  title: "Business development suite",
+  summary: "AI-assisted business development for a federal contractor: win-probability scoring from RFPs, pipeline tracking, CRM, and retrieval over past performance.",
+  status: "in-progress",
+  kind: "writeup",
+  org: "GeekSI",
+  stack: ["Python", "Streamlit", "PostgreSQL", "RAG", "Railway"],
+  tags: ["ai", "govcon"],
+  order: 5,
+};
+
+An internal product, so this page stays high level.
+
+**Direction:** upload an RFP and get a transparent, factor-by-factor win-probability
+estimate (no opaque LLM score), then track the opportunity through the pipeline. A
+retrieval-augmented assistant searches past performance and prior bids to help draft responses.
+
+**Stack:** a Python modular monolith (Streamlit today, with a React + FastAPI migration
+under way) over PostgreSQL, with semantic matching and RAG for the AI pieces.

@@ -1,0 +1,30 @@
+export const metadata = {
+  title: "Agentic development harness",
+  summary: "The tooling and conventions I use to run Claude Code on real projects: generated context maps, session preservation, and measuring whether the agent actually followed the rules.",
+  status: "in-progress",
+  kind: "writeup",
+  stack: ["Claude Code", "Python", "hooks"],
+  tags: ["ai-agents", "tooling"],
+  order: 6,
+};
+
+{/* TODO(Dylan): good candidate for a blog series. Edit the framing to taste. */}
+
+Most of my recent projects are built with an AI agent doing much of the typing. The
+interesting engineering problem turned out to be everything *around* the code: what
+the agent knows at the start of a session, and how you'd know if it ignored your standards.
+
+The pieces:
+
+- **Context maps:** a generator walks the code, pulls out annotated headers and public
+  signatures, and writes a versioned map per module. The agent reads the map instead of
+  rediscovering the repo every session.
+- **Session preservation:** session logs get mirrored into the repo and turned into
+  readable transcripts and summaries, so decisions made in conversation survive.
+- **Rule adherence and cost:** scripts measure whether documented process rules were
+  actually followed in each session, keep a ledger of deviations for a human to judge,
+  and track cost and output per session.
+- **Conventions:** `CLAUDE.md` instruction files, ADRs, and a memory-versus-source rule:
+  anything another session must inherit lives in the repo, not in the agent's memory.
+
+This site's own `CLAUDE.md` is a lighter version of the same setup.

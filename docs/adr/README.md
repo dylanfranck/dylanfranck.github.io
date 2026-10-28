@@ -7,3 +7,5 @@
 
 New ADR: next number, `ADR-NNN-short-slug.md`, sections Context / Options considered /
 Decision / Consequences. Supersede rather than rewrite accepted decisions.
+
+Undecided-but-concrete ideas live in [`../RADAR.md`](../RADAR.md).

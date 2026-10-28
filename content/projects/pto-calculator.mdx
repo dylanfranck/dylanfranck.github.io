@@ -1,0 +1,18 @@
+export const metadata = {
+  title: "PTO planner",
+  summary: "Projects sick and vacation balances forward through planned trips, so I can see whether a trip next June still leaves a cushion.",
+  status: "in-progress",
+  kind: "writeup",
+  stack: ["HTML", "JavaScript"],
+  tags: ["personal-tools"],
+  order: 8,
+};
+
+A single-file tool I use for myself. You enter current balances, accrual rules, caps, and
+observed holidays, add planned trips, and it draws month-by-month balances out to a
+projection date. It flags where a trip would dip below zero or where hours are lost to a cap.
+
+It isn't linked here on purpose. The useful version of a tool like this includes *my*
+data: when I'm traveling and with whom. That doesn't belong on a public site. Today the
+data lives in a JSON file I import and export. The next step is a private, signed-in
+version (the same pattern described under [Memories](/projects/memories/)).

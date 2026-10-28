@@ -1,11 +1,12 @@
 // MODULE: Projects
 // LAYER: 2
 // ROLE: Project summary card linking to its page (or straight out, for external projects)
-// DEPENDENCIES: next/link, lucide-react, @/feature/projects/components/ProjectStatusBadge, @/feature/projects/project-meta
+// DEPENDENCIES: next/link, lucide-react, @/shared-component, @/feature/projects/components/ProjectStatusBadge, @/feature/projects/project-meta
 // OWNER: Dylan / Claude
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { TagList } from "@/shared-component";
 import { ProjectStatusBadge } from "@/feature/projects/components/ProjectStatusBadge";
 import type { ProjectMeta } from "@/feature/projects/project-meta";
 
@@ -21,6 +22,8 @@ export function ProjectCard({ project }: { project: ProjectMeta }) {
         <ProjectStatusBadge status={project.status} />
       </div>
       <p className="text-sm text-muted-foreground">{project.summary}</p>
+      <TagList items={project.stack.slice(0, 4)} label="Stack" />
+      {project.org && <p className="mt-auto font-mono text-xs text-muted-foreground">Built at {project.org}</p>}
       {project.kind === "external" && project.url && (
         <p className="mt-auto inline-flex items-center gap-1 font-mono text-xs text-primary">
           {new URL(project.url).host}

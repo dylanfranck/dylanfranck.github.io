@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/element/button";
-import { PageContainer, Prose } from "@/shared-component";
+import { PageContainer, Prose, TagList } from "@/shared-component";
 import { ProjectEmbed } from "@/feature/projects/components/ProjectEmbed";
 import { ProjectStatusBadge } from "@/feature/projects/components/ProjectStatusBadge";
 import { getProjects, loadProject } from "@/feature/projects/projects";
@@ -46,6 +46,8 @@ export default async function ProjectPage({ params }: Props) {
         <ProjectStatusBadge status={meta.status} />
         <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{meta.title}</h1>
         <p className="mt-3 text-lg text-muted-foreground">{meta.summary}</p>
+        {meta.org && <p className="mt-2 font-mono text-xs text-muted-foreground">Built at {meta.org}</p>}
+        <TagList items={meta.stack} label="Stack" className="mt-4" />
         {meta.url && (
           <Button asChild className="mt-6">
             <a href={meta.url}>

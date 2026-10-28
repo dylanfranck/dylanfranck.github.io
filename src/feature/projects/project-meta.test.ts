@@ -9,10 +9,20 @@ import { parseProjectMeta, sortByOrder } from "@/feature/projects/project-meta";
 const base = { title: "T", summary: "S", status: "live", kind: "writeup" };
 
 describe("parseProjectMeta", () => {
-  it("defaults order to 100 and draft to false", () => {
+  it("defaults order to 100, draft to false, and stack to empty", () => {
     const p = parseProjectMeta("x", base);
     expect(p.order).toBe(100);
     expect(p.draft).toBe(false);
+    expect(p.stack).toEqual([]);
+    expect(p.org).toBeUndefined();
+  });
+  it("reads stack and org", () => {
+    const p = parseProjectMeta("x", { ...base, stack: ["FastAPI"], org: "GeekSI" });
+    expect(p.stack).toEqual(["FastAPI"]);
+    expect(p.org).toBe("GeekSI");
+  });
+  it("rejects a non-array stack", () => {
+    expect(() => parseProjectMeta("x", { ...base, stack: "FastAPI" })).toThrow("stack must be an array");
   });
   it("requires url for external projects", () => {
     expect(() => parseProjectMeta("x", { ...base, kind: "external" })).toThrow('needs metadata.url');

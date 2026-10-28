@@ -1,0 +1,19 @@
+export const metadata = {
+  title: "Contract lifecycle management",
+  summary: "Post-award contract and task-order management for federal contractors: labor categories, billing defensibility, and the audit trail behind them.",
+  status: "in-progress",
+  kind: "writeup",
+  org: "GeekSI",
+  stack: ["FastAPI", "PostgreSQL", "React", "TypeScript", "Playwright"],
+  tags: ["govcon", "saas"],
+  order: 3,
+};
+
+An internal product, so this page stays high level.
+
+**Direction:** replace a spreadsheet-and-handoffs process with a system that can answer
+*"is this billing defensible, and can we prove it?"* Built multi-tenant from day one so
+it can stand alone or sit alongside sibling tools.
+
+**Stack:** a FastAPI modular monolith over PostgreSQL with row-level-security tenancy,
+a React 19 + TypeScript front end, and Playwright end-to-end tests from the start.

@@ -1,10 +1,11 @@
 // MODULE: About
 // LAYER: 2
 // ROLE: Employer → engagements timeline with dates, highlights, and tech
-// DEPENDENCIES: @/lib/format, @/feature/about/types
+// DEPENDENCIES: @/lib/format, @/shared-component, @/feature/about/types
 // OWNER: Dylan / Claude
 
 import { formatMonthRange } from "@/lib/format";
+import { TagList } from "@/shared-component";
 import type { Employer } from "@/feature/about/types";
 
 export function ExperienceTimeline({ employers }: { employers: Employer[] }) {
@@ -34,13 +35,7 @@ export function ExperienceTimeline({ employers }: { employers: Employer[] }) {
                     <li key={h}>{h}</li>
                   ))}
                 </ul>
-                <ul aria-label="Technologies" className="mt-3 flex flex-wrap gap-1.5">
-                  {e.tech.map((t) => (
-                    <li key={t} className="rounded-md bg-secondary px-2 py-0.5 font-mono text-xs text-secondary-foreground">
-                      {t}
-                    </li>
-                  ))}
-                </ul>
+                <TagList items={e.tech} label="Technologies" className="mt-3" />
               </li>
             ))}
           </ol>
