@@ -8,6 +8,7 @@ const config = [
     ignores: [".next/**", "out/**", "coverage/**", "legacy/**", "reference/**", "next-env.d.ts"],
   },
   {
+    files: ["src/**/*.{ts,tsx}"],
     rules: {
       // WHY: @/ alias only (FRONTEND_CODEGEN_STANDARD carry-over) — relative
       // paths break silently when files move between layers.

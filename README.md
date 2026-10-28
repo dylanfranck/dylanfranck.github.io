@@ -8,7 +8,14 @@ by GitHub Pages.
 ```sh
 npm install
 npm run dev        # http://localhost:3000 — drafts are visible here
-npm run check      # typecheck, lint, tests, production build (what CI runs)
+npm run check      # typecheck, lint, unit tests, build, e2e + axe (what CI runs)
+```
+
+First-time Playwright setup: `npm run test:e2e:install` (downloads Chromium). On Linux, also
+run `npx playwright install-deps chromium` once for the system libraries.
+
+```sh
+npm run test:e2e   # e2e + accessibility against out/ (run after a build)
 ```
 
 ## Write

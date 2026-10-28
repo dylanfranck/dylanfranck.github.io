@@ -7,5 +7,13 @@
 import { cn } from "@/lib/utils";
 
 export function PageContainer({ className, ...props }: React.ComponentProps<"main">) {
-  return <main className={cn("mx-auto w-full max-w-3xl flex-1 px-5 py-12 sm:py-16", className)} {...props} />;
+  // WHY: id + tabIndex make it the skip link's target; focus lands here without a visible ring.
+  return (
+    <main
+      id="main"
+      tabIndex={-1}
+      className={cn("mx-auto w-full max-w-3xl flex-1 px-5 py-12 outline-none sm:py-16", className)}
+      {...props}
+    />
+  );
 }

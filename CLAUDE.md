@@ -17,9 +17,10 @@ project needs one — and then usually in that project's own repo, not here.
 - **Git is intentionally not installed.** Dylan stages, commits, and pushes from the host.
   Never run git, never try to install it, never work around it. Prepare changes and end
   with a short summary of what changed so it can be committed.
-- `node_modules/` is a container volume; the repo itself is a Windows mount, so
-  `next build` is slow here (minutes). Prefer `tsc`, `eslint`, and `vitest` for quick
-  checks and leave full builds to Dylan or CI unless asked.
+- The repo is a Windows bind mount; `node_modules/` and `.next/` are Linux volumes in the
+  sandbox (`dfsite-sandbox` compose, kept outside this repo). A warm `next build` takes
+  seconds and the Playwright suite ~20s, so run `npm run check` before handing work back.
+  The first build after the `.next` volume is recreated is cold (~4–5 min); that's expected.
 - `reference/` holds private material from other projects (including client documents).
   It is gitignored. Read only what a task needs; never copy names, emails, or client
   details from it into this repo. `legacy/` is the retired 2022 Nicepage site, kept for
@@ -39,7 +40,7 @@ is cross-cutting or matches an ADR trigger, in which case wait for a go-ahead.
 | Language | TypeScript, strict |
 | Content | MDX via `@next/mdx`; metadata as `export const metadata = { ... }` |
 | Styling | Tailwind CSS v4 (no config file), shadcn/ui primitives, Lucide icons |
-| Tests | Vitest + Testing Library (jsdom) |
+| Tests | Vitest + Testing Library (jsdom); Playwright + axe-core against the static export |
 | Hosting | GitHub Pages via Actions (`.github/workflows/ci.yml`), custom domain `dylanfranck.com` |
 
 Versions are pinned exactly in `package.json`. Prefer releases at least two weeks old,
@@ -116,7 +117,13 @@ never bend a test to match wrong behavior. Run once, read all failures, fix in o
 | `src/element/` primitives | none |
 | Layer 2 components and content validation | ~80%+ |
 | `src/lib/` formatting/validation utilities | ~90% |
-| Routes (`src/app/`) | covered by `next build` in CI |
+| Routes (`src/app/`) | `next build` + Playwright (`e2e/`) in CI |
+
+**Accessibility is a gate.** `e2e/a11y.spec.ts` runs axe (WCAG 2.2 AA) on every URL in the
+built sitemap plus `404.html`, in light, dark, and mobile projects. New pages are covered
+automatically. A violation fails CI and blocks the deploy; fix the page, never the test.
+Color tokens must keep ≥ 4.5:1 text contrast in **both** themes — check before changing
+`globals.css`.
 
 ## Commands
 
@@ -124,7 +131,8 @@ never bend a test to match wrong behavior. Run once, read all failures, fix in o
 |---|---|
 | Dev server (shows drafts) | `npm run dev` → http://localhost:3000 |
 | Quick checks | `npx tsc --noEmit && npx eslint . && npx vitest run` |
-| Everything CI runs | `npm run check` (includes the slow `next build`) |
+| E2E + axe (after a build) | `npm run test:e2e` (first time: `npm run test:e2e:install`; Linux also needs `npx playwright install-deps chromium`) |
+| Everything CI runs | `npm run check` (includes the slow `next build` + Playwright) |
 | Preview the export | `npm run build && npm start` |
 
 ## Commit format (for Dylan's host-side commits)
