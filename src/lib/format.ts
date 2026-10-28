@@ -13,3 +13,15 @@ export function formatDate(isoDate: string): string {
     timeZone: "UTC",
   }).format(new Date(`${isoDate}T00:00:00Z`));
 }
+
+/** "2025-10" → "Oct 2025". */
+export function formatMonth(yearMonth: string): string {
+  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", timeZone: "UTC" }).format(
+    new Date(`${yearMonth}-01T00:00:00Z`),
+  );
+}
+
+/** "2022-06", undefined → "Jun 2022 – Present". */
+export function formatMonthRange(start: string, end?: string): string {
+  return `${formatMonth(start)} – ${end ? formatMonth(end) : "Present"}`;
+}

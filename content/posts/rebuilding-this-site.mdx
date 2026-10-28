@@ -1,14 +1,51 @@
 export const metadata = {
-  title: "Rebuilding this site",
-  date: "2026-10-27",
-  summary: "Retiring a 2022 page-builder export for something I can actually write in.",
-  tags: ["meta", "nextjs"],
+  title: "Rebuilding this site (with an agent in the loop)",
+  date: "2026-10-28",
+  summary: "Retiring a 2022 page-builder export for a Next.js site I can actually write in, plus a real domain and a CI pipeline that won't let me leak a secret.",
+  tags: ["meta", "nextjs", "ai-agents", "dns"],
   draft: true,
 };
 
-TODO(Dylan): this is a starter draft — rewrite or delete. It only appears under `npm run dev`
-until you remove `draft: true`.
+{/* TODO(Dylan): drafted from our session. Rewrite in your voice, cut what you don't care about, then remove `draft: true`. */}
 
 The last version of this site was a 6 MB export from a drag-and-drop builder, frozen in the
-spring of 2022. This one is Next.js, exported as static HTML to GitHub Pages, with posts
-written as MDX files in the repo.
+spring of 2022: "graduating senior," a contact form that posted to nowhere, and three pages
+that said *Under Construction*. Rather than keep updating LinkedIn, I wanted a place I'd
+actually write, so I rebuilt it in an evening with Claude Code doing most of the typing.
+
+## The stack, and why
+
+I weighed Vite + React, Astro, and Next.js. Astro is arguably the best fit for a blog. I
+went with **Next.js using static export** anyway, because I want this to grow into a
+drawer of projects, and Next has a clean exit path: delete one line of config and it can
+run server code on a different host. Until then it's plain HTML on GitHub Pages.
+
+Posts are MDX files in the repo, and adding one means adding a file. Metadata is validated
+at build time, so a typo in a date fails the build instead of shipping a broken page.
+
+## Hub and spoke
+
+The bigger idea is that this site is a front door, not a monolith. My Japanese study app
+already runs on Vercel at [jp.dylanfranck.com](https://jp.dylanfranck.com). Future projects
+(a photo journal, a game, maybe a FastAPI service) get their own repos, hosts, and
+subdomains. The domain ties them together and DNS is the integration point. That's the
+"networking" itch I've wanted to scratch.
+
+## Locking it down
+
+The repo is public, so I borrowed patterns from a security-heavy project at work:
+
+- **gitleaks** scans the *full* git history on every push. A secret deleted in a later
+  commit is still public.
+- Every third-party GitHub Action is **pinned to a commit SHA**, and workflows default to
+  read-only permissions.
+- The deploy job only runs after the secret scan, type checks, lint, tests, and build all pass.
+
+## Working with the agent
+
+TODO(Dylan): what worked and what didn't. Some candidates from the session:
+- It noticed my old résumé PDF was still publicly reachable.
+- It caught that a CLI had quietly installed an extra package, and that the pinned Next.js
+  version had a critical advisory.
+- The guardrails I gave it (no git in the container; I commit) and how the CLAUDE.md
+  carried over from my work projects.

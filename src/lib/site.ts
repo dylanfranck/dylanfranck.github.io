@@ -6,8 +6,10 @@
 export const site = {
   name: "Dylan Franck",
   url: "https://dylanfranck.com",
-  description: "Software engineer. Notes on what I'm building, and a drawer of projects.",
+  description:
+    "Software engineer building VA health platforms and AI-assisted tools. Notes on what I'm building, and a drawer of side projects.",
   nav: [
+    { href: "/about/", label: "About" },
     { href: "/blog/", label: "Blog" },
     { href: "/projects/", label: "Projects" },
   ],

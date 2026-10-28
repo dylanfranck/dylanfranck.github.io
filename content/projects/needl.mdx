@@ -1,0 +1,27 @@
+export const metadata = {
+  title: "Needl",
+  summary: "An AI-assisted applicant tracking system: NLP résumé parsing and candidate scoring, built with a team of 18.",
+  status: "in-progress",
+  kind: "writeup",
+  tags: ["ai", "spring-boot", "react", "aws"],
+  order: 2,
+};
+
+{/* TODO(Dylan): drafted from your résumé. Check what's OK to say publicly about Needl. */}
+
+Needl started as an R&D project at GeekSI. The idea was to help recruiters and candidates
+find each other faster by actually reading résumés instead of keyword-matching them. Since
+2022 I've led it as solutions architect and tech lead, and we pitched it to partners in
+December 2025.
+
+## How it's built
+
+- **Application:** Spring Boot with Hibernate over a MySQL schema, and a React + TypeScript front end.
+- **Intelligence:** a Flask API wrapping an NLP résumé-parsing pipeline (spaCy) and ensemble
+  scoring models (KNN, logistic regression, AdaBoost via scikit-learn).
+- **Infrastructure:** AWS (VPC, ECS, ECR, Lambda, SQS, S3), all containerized with Docker.
+
+## What I learned
+
+TODO(Dylan): the interesting part. What changed across the architectural rewrites, what
+you'd do differently, and what leading 18 people on a side-of-desk product taught you.
